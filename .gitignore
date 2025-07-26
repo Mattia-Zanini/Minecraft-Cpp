@@ -1,11 +1,12 @@
 File e cartelle generati dal compilatore e dal sistema
 Includi la cartella di build
-
 /build/
+
 File di sistema operativo
 macOS
-
 .DS_Store
-File di configurazione dell'editor
 
+File di configurazione dell'editor
 .vscode/
+
+/vendored/
