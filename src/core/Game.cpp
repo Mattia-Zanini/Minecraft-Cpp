@@ -22,13 +22,8 @@ namespace MC
     // Inizializza le variabili
     initVars();
 
-    // Inizializza il logger
-    loggerManager.init();
-    LOGGER_INFO("logger initialized");
-    LOGGER_INFO("SLD version: {}.{}.{}", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);
-
-    isRunning = false;
-    LOGGER_ASSERT(isRunning == true, "assert test");
+    // isRunning = false;
+    // LOGGER_ASSERT(isRunning == true, "assert test");
 
     // Crea la finestra
     window = std::make_unique<Window>();
@@ -41,6 +36,7 @@ namespace MC
 
     // Inizializza il gestore di input
     inputHandler = std::make_unique<InputHandler>();
+
     // Ottiene il renderer dalla finestra
     renderer = window->getRenderer();
   }
@@ -48,8 +44,7 @@ namespace MC
   // Distruttore della classe Game
   Game::~Game()
   {
-    LOGGER_INFO("logger is shutting down");
-    loggerManager.shutdown();
+    LOGGER_INFO("Destroying Game object");
     renderer = nullptr;
   };
 

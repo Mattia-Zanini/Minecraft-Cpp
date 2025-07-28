@@ -18,8 +18,13 @@ namespace MC
     if (created)
     {
       SDL_DestroyRenderer(renderer);
+      LOGGER_INFO("Destroyed the renderer");
+
       SDL_DestroyWindow(window);
+      LOGGER_INFO("Destroyed the window");
+
       SDL_Quit();
+      LOGGER_INFO("Clean up all initialized SDL subsystems");
     }
 
     initVars();
@@ -27,6 +32,7 @@ namespace MC
 
   bool Window::createWindow(const char *title, int width, int height, int minWidth, int minHeight, SDL_WindowFlags flags)
   {
+    LOGGER_INFO("Beginning the operations to create the window");
 
     if (SDL_Init(SDL_INIT_VIDEO) == false)
     {
@@ -54,6 +60,7 @@ namespace MC
     }
 
     created = true;
+    LOGGER_INFO("Window and Renderer created");
     return created;
   }
 

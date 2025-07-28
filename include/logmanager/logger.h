@@ -11,6 +11,9 @@ namespace MC
   class Logger
   {
   public:
+    Logger();
+    ~Logger();
+
     // Inizializza il logger
     void init();
     // Arresta il logger

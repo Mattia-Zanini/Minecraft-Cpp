@@ -27,4 +27,16 @@ namespace MC
   {
     spdlog::shutdown();
   }
+
+  Logger::Logger()
+  {
+    init();
+    LOGGER_INFO("Logger initialized");
+  }
+
+  Logger::~Logger()
+  {
+    LOGGER_INFO("Logger is shutting down");
+    shutdown();
+  }
 }

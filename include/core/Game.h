@@ -27,8 +27,6 @@ namespace MC
     std::unique_ptr<Window> window;
     std::unique_ptr<InputHandler> inputHandler;
     SDL_Renderer *renderer;
-    Logger loggerManager;
-    std::shared_ptr<spdlog::logger> logger;
   };
 }
 
