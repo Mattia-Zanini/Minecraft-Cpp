@@ -1,10 +1,11 @@
 #include "core/Window.h"
 #include "logmanager/logger.h"
 
+#include "glad/glad.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <SDL3/SDL_opengl.h>
-#include <OpenGL/gl3.h>
+// #include <OpenGL/gl3.h>
 #include <string>
 
 namespace MC
@@ -56,6 +57,13 @@ namespace MC
     if (!context)
     {
       LOGGER_ERROR("Failed to create OpenGL context: {}", SDL_GetError());
+      return created;
+    }
+
+    // Inizializza GLAD per caricare i puntatori alle funzioni di OpenGL
+    if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
+    {
+      LOGGER_ERROR("Failed to initialize GLAD");
       return created;
     }
 

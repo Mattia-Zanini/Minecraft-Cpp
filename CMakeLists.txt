@@ -22,7 +22,10 @@ add_library(glad STATIC vendored/glad/src/glad.c)
 target_include_directories(glad PUBLIC vendored/glad/include)
 
 # Add the include directory to the target's include path
-target_include_directories(minecraftClone PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(minecraftClone PUBLIC 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+    vendored/glad/include
+)
 
 find_package(SDL3 REQUIRED)
 find_package(spdlog REQUIRED)
