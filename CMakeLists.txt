@@ -17,6 +17,10 @@ add_subdirectory(vendored/spdlog EXCLUDE_FROM_ALL)
 # Crea l'eseguibile
 add_executable(minecraftClone MACOSX_BUNDLE main.cpp ${SOURCES})
 
+# Create a static library for glad
+add_library(glad STATIC vendored/glad/src/glad.c)
+target_include_directories(glad PUBLIC vendored/glad/include)
+
 # Add the include directory to the target's include path
 target_include_directories(minecraftClone PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -27,6 +31,7 @@ find_package(OpenGL REQUIRED)
 # Linka le librerie necessarie
 target_link_libraries(minecraftClone PRIVATE SDL3::SDL3)
 target_link_libraries(minecraftClone PRIVATE spdlog::spdlog)
+target_link_libraries(minecraftClone PRIVATE glad)
 target_link_libraries(minecraftClone PRIVATE OpenGL::GL)
 
 # Copia le risorse nella directory di build
