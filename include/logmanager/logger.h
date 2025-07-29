@@ -69,6 +69,7 @@ namespace MC
   else                                                                                            \
   {                                                                                               \
     LOGGER_FATAL("ASSERT - {}\n\t{}\n\tin file: {}\n\tin line: {}", #x, msg, __FILE__, __LINE__); \
+    LOGGER_BREAK                                                                                  \
   }
 
 #else
@@ -78,5 +79,22 @@ namespace MC
 #define LOGGER_WARN(...) void(0)
 #define LOGGER_ERROR(...) void(0)
 #define LOGGER_FATAL(...) void(0)
+
+#endif
+
+#if defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__) || defined(__BORLANDC__)
+#define OS_WIN
+#define OS "windows"
+#define LOGGER_BREAK __debugbreak();
+
+#elif defined(__linux__) || defined(LINUX)
+#define OS_LINUX
+#define OS "linux"
+#define LOGGER_BREAK __builtin_debugtrap();
+
+#elif defined(__APPLE__)
+#define OS_APPLE
+#define OS "macos"
+#define LOGGER_BREAK __builtin_trap();
 
 #endif

@@ -20,9 +20,14 @@ add_executable(minecraftClone MACOSX_BUNDLE main.cpp ${SOURCES})
 # Add the include directory to the target's include path
 target_include_directories(minecraftClone PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
+find_package(SDL3 REQUIRED)
+find_package(spdlog REQUIRED)
+find_package(OpenGL REQUIRED)
+
 # Linka le librerie necessarie
 target_link_libraries(minecraftClone PRIVATE SDL3::SDL3)
 target_link_libraries(minecraftClone PRIVATE spdlog::spdlog)
+target_link_libraries(minecraftClone PRIVATE OpenGL::GL)
 
 # Copia le risorse nella directory di build
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/Release/minecraftClone.app/Contents/Resources)

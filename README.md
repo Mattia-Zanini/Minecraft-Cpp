@@ -24,8 +24,13 @@ Questo progetto utilizza CMake per la gestione della build.
 
 - Un compilatore C++ (es. GCC, Clang, MSVC)
 - CMake (versione 3.16)
-- SDL3
-- spdlog
+- **spdlog**: Libreria per il logging.
+- **SDL3**: Libreria per la gestione di finestre, input e audio.
+- **glad**: Libreria per il caricamento dei puntatori a funzioni di OpenGL.
+
+Per `spdlog`, `SDL3` e `glad`, è necessario scaricare le librerie e inserirle nella cartella `vendored` presente nella root del progetto.
+
+Per `glad`, è possibile generare i file necessari per **OpenGL 4.1 (Core)** tramite il [sito ufficiale di glad](https://glad.dav1d.de/).
 
 ### Compilazione
 

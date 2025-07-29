@@ -6,6 +6,7 @@ int main(int argc, char *argv[])
   // Inizializza il logger
   MC::Logger loggerManager;
   LOGGER_INFO("SLD version: {}.{}.{}", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);
+  LOGGER_INFO("Platform: {}", OS);
 
   // Crea un'istanza del gioco
   MC::Game game;

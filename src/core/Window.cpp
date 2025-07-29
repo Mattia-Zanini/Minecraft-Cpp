@@ -3,7 +3,8 @@
 
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
-#include <stdexcept>
+#include <SDL3/SDL_opengl.h>
+#include <OpenGL/gl3.h>
 #include <string>
 
 namespace MC
@@ -40,11 +41,32 @@ namespace MC
       return created;
     }
 
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
     window = SDL_CreateWindow(title, width, height, flags);
     if (window == nullptr)
     {
       LOGGER_ERROR("Couldn't create window: {}", SDL_GetError());
       return created;
+    }
+
+    SDL_GLContext context = SDL_GL_CreateContext(window);
+    if (!context)
+    {
+      LOGGER_ERROR("Failed to create OpenGL context: {}", SDL_GetError());
+      return created;
+    }
+
+    const GLubyte *version = glGetString(GL_VERSION);
+    if (version)
+    {
+      LOGGER_INFO("OpenGL Version: {}", (const char *)version);
+    }
+    else
+    {
+      LOGGER_ERROR("Failed to get OpenGL version.");
     }
 
     if (SDL_SetWindowMinimumSize(window, minWidth, minHeight) == false)
