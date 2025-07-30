@@ -1,7 +1,10 @@
-#include "../include/core/InputHandler.h"
-#include <SDL3/SDL_keyboard.h>
+#include "core/InputHandler.h"
+
+#include "SDL3/SDL_keyboard.h"
+
 #include "logmanager/logger.h"
-#include <cstring> // Per memcpy
+
+#include <cstring>
 
 namespace MC
 {

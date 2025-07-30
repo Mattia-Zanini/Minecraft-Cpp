@@ -1,11 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Window.h"
-#include "InputHandler.h"
+#include "core/Window.h"
+#include "core/InputHandler.h"
+
 #include "logmanager/logger.h"
-#include <SDL3/SDL_render.h>
-#include <memory>
+
+#include "SDL3/SDL_render.h"
+
+#include "memory"
 
 namespace MC
 {

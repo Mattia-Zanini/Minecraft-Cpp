@@ -1,9 +1,10 @@
 #ifndef LOGMANAGER_H
 #define LOGMANAGER_H
 
-#include <memory>
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
+#include "memory"
+
+#include "spdlog/spdlog.h"
+#include "spdlog/sinks/stdout_color_sinks.h"
 
 namespace MC
 {

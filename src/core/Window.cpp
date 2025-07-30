@@ -2,11 +2,14 @@
 #include "logmanager/logger.h"
 
 #include "glad/glad.h"
-#include <SDL3/SDL.h>
-#include <SDL3/SDL_main.h>
-#include <SDL3/SDL_opengl.h>
-// #include <OpenGL/gl3.h>
-#include <string>
+
+#include "SDL3/SDL.h"
+#include "SDL3/SDL_main.h"
+#include "SDL3/SDL_opengl.h"
+
+// #include "OpenGL/gl3.h"
+
+#include "string"
 
 namespace MC
 {

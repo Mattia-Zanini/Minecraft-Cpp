@@ -1,8 +1,8 @@
 #ifndef INPUTHANDLER_H
 #define INPUTHANDLER_H
 
-#include <SDL3/SDL_events.h>
-#include <SDL3/SDL_scancode.h>
+#include "SDL3/SDL_events.h"
+#include "SDL3/SDL_scancode.h"
 
 namespace MC
 {

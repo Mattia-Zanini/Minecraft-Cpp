@@ -30,7 +30,11 @@ Questo progetto utilizza CMake per la gestione della build.
 
 Per `spdlog`, `SDL3` e `glad`, è necessario scaricare le librerie e inserirle nella cartella `vendored` presente nella root del progetto.
 
-Per `glad`, è possibile generare i file necessari per **OpenGL 4.1 (Core)** tramite il [sito ufficiale di glad](https://glad.dav1d.de/).
+> [!WARNING]
+> Per `glad`, è **fondamentale** generare i file per la versione corretta di OpenGL. Il progetto è configurato per usare **OpenGL 4.1 (Core)**, che è la versione massima supportata da macOS.
+> Quando si generano i file dal [sito ufficiale di glad](https://glad.dav1d.de/), assicurarsi di impostare:
+> - `gl`: `Version 4.1`
+> - `Profile`: `Core`
 
 ### Compilazione
 
