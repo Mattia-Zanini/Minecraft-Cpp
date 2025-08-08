@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "core/Window.h"
+#include "core/Renderer.h"
 #include "core/InputHandler.h"
 
 #include "logmanager/logger.h"
@@ -26,10 +27,10 @@ namespace MC
     void update();
     void render();
 
-    bool isRunning;
-    std::unique_ptr<Window> window;
-    std::unique_ptr<InputHandler> inputHandler;
-    SDL_Renderer *renderer;
+    bool m_IsRunning;
+    std::unique_ptr<Window> m_Window;
+    std::unique_ptr<InputHandler> m_InputHandler;
+    Renderer m_Renderer;
   };
 }
 

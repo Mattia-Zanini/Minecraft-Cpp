@@ -1,6 +1,7 @@
 #include "core/Game.h"
 #include "core/InputHandler.h"
 #include "core/Window.h"
+#include "core/Renderer.h"
 
 #include "logmanager/logger.h"
 
@@ -13,8 +14,7 @@ namespace MC
   // Inizializza le variabili
   void Game::initVars()
   {
-    isRunning = true;
-    renderer = nullptr;
+    m_IsRunning = true;
   };
 
   // Costruttore della classe Game
@@ -23,39 +23,35 @@ namespace MC
     // Inizializza le variabili
     initVars();
 
-    // isRunning = false;
-    // LOGGER_ASSERT(isRunning == true, "assert test");
-
     // Crea la finestra
-    window = std::make_unique<Window>();
-    if (!window->createWindow("Minecraft C++", 1280, 720, 640, 480, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL))
+    m_Window = std::make_unique<Window>();
+    if (!m_Window->createWindow("Minecraft C++", 1280, 720, 640, 480, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL))
     {
       LOGGER_ERROR("Error during game initialization, couldn't create Window");
-      isRunning = false;
+      m_IsRunning = false;
       return;
     }
 
     // Inizializza il gestore di input
-    inputHandler = std::make_unique<InputHandler>();
+    m_InputHandler = std::make_unique<InputHandler>();
 
     // Ottiene il renderer dalla finestra
-    renderer = window->getRenderer();
+    m_Renderer.setRenderer(m_Window->getRenderer());
   }
 
   // Distruttore della classe Game
   Game::~Game()
   {
     LOGGER_INFO("Destroying Game object");
-    renderer = nullptr;
   };
 
   // Avvia il ciclo principale del gioco
   void Game::run()
   {
-    if (isRunning == false)
+    if (m_IsRunning == false)
       return;
 
-    while (isRunning)
+    while (m_IsRunning)
     {
       processEvents();
       update();
@@ -66,9 +62,9 @@ namespace MC
   // Processa gli eventi di input
   void Game::processEvents()
   {
-    inputHandler->processEvents();
-    if (inputHandler->shouldQuit())
-      isRunning = false;
+    m_InputHandler->processEvents();
+    if (m_InputHandler->shouldQuit())
+      m_IsRunning = false;
   }
 
   // Aggiorna lo stato del gioco
@@ -78,13 +74,13 @@ namespace MC
   void Game::render()
   {
     // Imposta il colore di disegno per il renderer
-    SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+    // SDL_SetRenderDrawColor(m_Renderer, 0, 0, 255, 255);
     // Pulisce lo schermo con il colore impostato
-    SDL_RenderClear(renderer);
+    // SDL_RenderClear(m_Renderer);
 
     // Render game objects here
 
     // Aggiorna lo schermo con il rendering
-    SDL_RenderPresent(renderer);
+    // SDL_RenderPresent(m_Renderer);
   }
 }

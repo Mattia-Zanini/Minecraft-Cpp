@@ -22,8 +22,8 @@ namespace MC
     bool shouldQuit() const;
 
   private:
-    bool quit;
-    const bool *keyboardState; // Stato attuale della tastiera (gestito da SDL)
+    bool m_Quit;
+    const bool *m_KeyboardState; // Stato attuale della tastiera (gestito da SDL)
   };
 }
 #endif

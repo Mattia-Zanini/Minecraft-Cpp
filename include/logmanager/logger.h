@@ -63,6 +63,7 @@ namespace MC
     spdlog::get(LOGGER_DEFAULT_NAME)->critical(__VA_ARGS__); \
   }
 
+// L'assert si attiva e ferma tutto solo se la condizione è falsa
 #define LOGGER_ASSERT(x, msg)                                                                     \
   if ((x))                                                                                        \
   {                                                                                               \
@@ -85,17 +86,17 @@ namespace MC
 
 #if defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__) || defined(__BORLANDC__)
 #define OS_WIN
-#define OS "windows"
+#define OS "WINDOWS"
 #define LOGGER_BREAK __debugbreak();
 
 #elif defined(__linux__) || defined(LINUX)
 #define OS_LINUX
-#define OS "linux"
+#define OS "LINUX"
 #define LOGGER_BREAK __builtin_debugtrap();
 
 #elif defined(__APPLE__)
 #define OS_APPLE
-#define OS "macos"
+#define OS "MACOSX"
 #define LOGGER_BREAK __builtin_trap();
 
 #endif

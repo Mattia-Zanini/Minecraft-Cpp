@@ -27,12 +27,13 @@ namespace MC
     Window &operator=(const Window &) = delete;
 
   private:
-    bool created;
-    SDL_Window *window;
-    SDL_Renderer *renderer;
-    SDL_Surface *surface;
-    SDL_Texture *texture;
-    SDL_Event *event;
+    bool m_Created;
+    SDL_Window *m_Window;
+    SDL_Renderer *m_Renderer;
+    SDL_Surface *m_Surface;
+    SDL_Texture *m_Texture;
+    SDL_Event *m_Event;
+    SDL_GLContext m_GlContext;
 
     // Inizializza le variabili della finestra.
     void initVars();

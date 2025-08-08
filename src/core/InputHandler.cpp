@@ -9,9 +9,9 @@
 namespace MC
 {
   // Costruttore: inizializza lo stato di quit a false e ottiene lo stato della tastiera.
-  InputHandler::InputHandler() : quit(false)
+  InputHandler::InputHandler() : m_Quit(false)
   {
-    keyboardState = SDL_GetKeyboardState(NULL);
+    m_KeyboardState = SDL_GetKeyboardState(NULL);
     LOGGER_INFO("Input Handler created");
   }
 
@@ -28,10 +28,10 @@ namespace MC
     while (SDL_PollEvent(&event))
     {
       if (event.type == SDL_EVENT_QUIT)
-        quit = true;
+        m_Quit = true;
     }
   }
 
   // shouldQuit restituisce true se il gioco deve terminare, altrimenti false.
-  bool InputHandler::shouldQuit() const { return quit; }
+  bool InputHandler::shouldQuit() const { return m_Quit; }
 }
