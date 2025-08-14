@@ -14,8 +14,14 @@ file(GLOB HEADERS "include/core/*.h" "include/logmanager/*.h")
 add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 add_subdirectory(vendored/spdlog EXCLUDE_FROM_ALL)
 
-# Crea l'eseguibile
-add_executable(minecraftClone MACOSX_BUNDLE main.cpp ${SOURCES})
+# Crea l'eseguibile in base alla piattaforma
+if(APPLE)
+    add_executable(minecraftClone MACOSX_BUNDLE main.cpp ${SOURCES})
+elseif(WIN32)
+    add_executable(minecraftClone WIN32 main.cpp ${SOURCES})
+else()
+    add_executable(minecraftClone main.cpp ${SOURCES})
+endif()
 
 # Create a static library for glad
 add_library(glad STATIC vendored/glad/src/glad.c)
@@ -27,8 +33,7 @@ target_include_directories(minecraftClone PUBLIC
     vendored/glad/include
 )
 
-find_package(SDL3 REQUIRED)
-find_package(spdlog REQUIRED)
+
 find_package(OpenGL REQUIRED)
 
 # Linka le librerie necessarie
@@ -37,5 +42,19 @@ target_link_libraries(minecraftClone PRIVATE spdlog::spdlog)
 target_link_libraries(minecraftClone PRIVATE glad)
 target_link_libraries(minecraftClone PRIVATE OpenGL::GL)
 
-# Copia le risorse nella directory di build
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR}/Release/minecraftClone.app/Contents/Resources)
+# Copia le risorse nella directory di build in base alla piattaforma
+if(APPLE)
+    # Per macOS, le risorse vanno nel bundle. Questo comando viene eseguito dopo la compilazione.
+    add_custom_command(TARGET minecraftClone POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+            "$<TARGET_BUNDLE_CONTENT_DIR:minecraftClone>/Resources/assets"
+        )
+else()
+    # Per Windows e Linux, copia le risorse accanto all'eseguibile dopo la compilazione.
+    add_custom_command(TARGET minecraftClone POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/assets"
+            "$<TARGET_FILE_DIR:minecraftClone>/assets"
+        )
+endif()
