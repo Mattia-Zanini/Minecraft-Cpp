@@ -25,6 +25,7 @@ namespace MC
 
     // Crea la finestra
     m_Window = std::make_unique<Window>();
+    ASSERT(m_Window, "Window unique pointer is null");
     if (!m_Window->createWindow("Minecraft C++", 1280, 720, 640, 480, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL))
     {
       LOGGER_ERROR("Error during game initialization, couldn't create Window");
@@ -34,9 +35,11 @@ namespace MC
 
     // Inizializza il gestore di input
     m_InputHandler = std::make_unique<InputHandler>();
+    ASSERT(m_InputHandler, "InputHandler unique pointer is null");
 
     // Ottiene il renderer dalla finestra
     m_Renderer = std::make_unique<Renderer>(m_Window->getSdlWindow());
+    ASSERT(m_Renderer, "Renderer unique pointer is null");
   }
 
   // Distruttore della classe Game

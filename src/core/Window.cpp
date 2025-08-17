@@ -109,5 +109,9 @@ namespace MC
     m_Event = nullptr;
   }
 
-  SDL_Window *Window::getSdlWindow() const { return m_Window; }
+  SDL_Window *Window::getSdlWindow() const
+  {
+    ASSERT(m_Window, "m_Window is null");
+    return m_Window;
+  }
 }

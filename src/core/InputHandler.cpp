@@ -12,6 +12,7 @@ namespace MC
   InputHandler::InputHandler() : m_Quit(false)
   {
     m_KeyboardState = SDL_GetKeyboardState(NULL);
+    ASSERT(m_KeyboardState, "Keyboard state is null");
     LOGGER_INFO("Input Handler created");
   }
 

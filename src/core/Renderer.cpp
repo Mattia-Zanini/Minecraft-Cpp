@@ -9,6 +9,7 @@ namespace MC
 {
   Renderer::Renderer(SDL_Window* window)
   {
+    ASSERT(window, "SDL_Window is null");
     m_SdlWindow = window;
   }
 

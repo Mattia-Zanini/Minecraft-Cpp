@@ -25,6 +25,7 @@ namespace MC
 
     // Registra il logger appena creato per renderlo accessibile globalmente tramite spdlog::get().
     spdlog::register_logger(logger);
+    ASSERT(spdlog::get(LOGGER_DEFAULT_NAME), "Logger is null after registration");
   }
 
   // shutdown rilascia le risorse utilizzate da spdlog.
