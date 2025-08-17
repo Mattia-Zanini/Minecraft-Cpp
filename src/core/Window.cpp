@@ -22,14 +22,11 @@ namespace MC
   {
     if (m_Window)
     {
-      SDL_DestroyRenderer(m_Renderer);
-      LOGGER_INFO("Destroyed the renderer");
-
       SDL_DestroyWindow(m_Window);
-      LOGGER_INFO("Destroyed the window");
+      LOGGER_INFO("Destroyed the Window");
 
       SDL_Quit();
-      LOGGER_INFO("Clean up all initialized SDL subsystems");
+      LOGGER_INFO("Cleaned up all initialized SDL subsystems");
     }
 
     initVars();
@@ -98,13 +95,6 @@ namespace MC
       LOGGER_ERROR("Couldn't set minimum window size: {}", SDL_GetError());
     }
 
-    m_Renderer = SDL_CreateRenderer(m_Window, nullptr);
-    if (m_Renderer == nullptr)
-    {
-      LOGGER_ERROR("Couldn't create renderer: {}", SDL_GetError());
-      return m_Created;
-    }
-
     m_Created = true;
     LOGGER_INFO("Window and Renderer created");
     return m_Created;
@@ -113,13 +103,11 @@ namespace MC
   void Window::initVars()
   {
     m_Created = false;
-
     m_Window = nullptr;
-    m_Renderer = nullptr;
     m_Surface = nullptr;
     m_Texture = nullptr;
     m_Event = nullptr;
   }
 
-  SDL_Renderer *Window::getRenderer() const { return m_Renderer; }
+  SDL_Window *Window::getSdlWindow() const { return m_Window; }
 }

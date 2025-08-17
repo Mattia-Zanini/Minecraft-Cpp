@@ -36,7 +36,7 @@ namespace MC
     m_InputHandler = std::make_unique<InputHandler>();
 
     // Ottiene il renderer dalla finestra
-    m_Renderer.setRenderer(m_Window->getRenderer());
+    m_Renderer = std::make_unique<Renderer>(m_Window->getSdlWindow());
   }
 
   // Distruttore della classe Game
@@ -73,14 +73,10 @@ namespace MC
   // Renderizza il gioco
   void Game::render()
   {
-    // Imposta il colore di disegno per il renderer
-    // SDL_SetRenderDrawColor(m_Renderer, 0, 0, 255, 255);
-    // Pulisce lo schermo con il colore impostato
-    // SDL_RenderClear(m_Renderer);
+    m_Renderer->clear();
 
     // Render game objects here
 
-    // Aggiorna lo schermo con il rendering
-    // SDL_RenderPresent(m_Renderer);
+    m_Renderer->swapBuffers();
   }
 }

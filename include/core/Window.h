@@ -1,3 +1,5 @@
+// Window.h
+
 #ifndef WINDOW_H
 #define WINDOW_H
 
@@ -8,34 +10,35 @@
 
 namespace MC
 {
-  // La classe Window gestisce la finestra di gioco.
+  // La classe Window astrae la creazione e la gestione della finestra di gioco tramite SDL.
   class Window
   {
   public:
-    // Costruttore: inizializza la finestra.
+    // Costruttore: inizializza i valori di default.
     Window();
-    // Distruttore: pulisce le risorse della finestra.
+    // Distruttore: distrugge la finestra e rilascia le risorse SDL.
     ~Window();
 
-    // createWindow crea una finestra di gioco con le dimensioni e i flag specificati.
+    // createWindow crea la finestra di gioco.
+    // Restituisce true in caso di successo, false altrimenti.
     bool createWindow(const char *title, int width, int height, int minWidth, int minHeight, SDL_WindowFlags flags);
-    // getRenderer restituisce il renderer della finestra.
-    SDL_Renderer *getRenderer() const;
+    
+    // getSdlWindow restituisce un puntatore grezzo alla finestra SDL sottostante.
+    SDL_Window *getSdlWindow() const;
 
-    // Impedisce la copia della finestra.
+    // Disabilita la copia e l'assegnazione per garantire che esista una sola istanza della finestra.
     Window(const Window &) = delete;
     Window &operator=(const Window &) = delete;
 
   private:
-    bool m_Created;
-    SDL_Window *m_Window;
-    SDL_Renderer *m_Renderer;
-    SDL_Surface *m_Surface;
-    SDL_Texture *m_Texture;
-    SDL_Event *m_Event;
-    SDL_GLContext m_GlContext;
+    bool m_Created; // Flag che indica se la finestra è stata creata con successo.
+    SDL_Window *m_Window; // Puntatore alla finestra SDL.
+    SDL_Surface *m_Surface; // Superficie di disegno associata alla finestra (per rendering software).
+    SDL_Texture *m_Texture; // Texture per il rendering hardware.
+    SDL_Event *m_Event; // Evento SDL.
+    SDL_GLContext m_GlContext; // Contesto OpenGL per il rendering accelerato.
 
-    // Inizializza le variabili della finestra.
+    // initVars inizializza le variabili membro.
     void initVars();
   };
 }

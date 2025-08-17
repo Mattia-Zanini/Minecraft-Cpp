@@ -2,22 +2,28 @@
 
 #include "logmanager/logger.h"
 
+#include "glad/glad.h"
+#include "SDL3/SDL_video.h"
+
 namespace MC
 {
-  Renderer::Renderer()
+  Renderer::Renderer(SDL_Window* window)
   {
-    m_SdlRenderer = nullptr;
-  }
-
-  void Renderer::setRenderer(SDL_Renderer *sdlRenderer)
-  {
-    LOGGER_ASSERT(sdlRenderer != nullptr, "You are trying to set the renderer pointer as nullptr");
-    m_SdlRenderer = sdlRenderer;
+    m_SdlWindow = window;
   }
 
   Renderer::~Renderer()
   {
-    // Il distruttore è vuoto perché questa classe non possiede m_SdlRenderer.
-    // La classe Window è responsabile della sua distruzione.
+  }
+
+  void Renderer::clear() const
+  {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+  }
+
+  void Renderer::swapBuffers() const
+  {
+    SDL_GL_SwapWindow(m_SdlWindow);
   }
 }

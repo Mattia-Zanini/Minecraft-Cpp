@@ -53,6 +53,7 @@ if(APPLE)
 else()
     # Per Windows e Linux, copia le risorse accanto all'eseguibile dopo la compilazione.
     add_custom_command(TARGET minecraftClone POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E remove_directory "$<TARGET_FILE_DIR:minecraftClone>/assets"
         COMMAND ${CMAKE_COMMAND} -E copy_directory
             "${CMAKE_CURRENT_SOURCE_DIR}/assets"
             "$<TARGET_FILE_DIR:minecraftClone>/assets"

@@ -1,8 +1,6 @@
 #ifndef LOGMANAGER_H
 #define LOGMANAGER_H
 
-#include "memory"
-
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/stdout_color_sinks.h"
 
@@ -64,14 +62,14 @@ namespace MC
   }
 
 // L'assert si attiva e ferma tutto solo se la condizione è falsa
-#define LOGGER_ASSERT(x, msg)                                                                     \
+#define ASSERT(x, msg)                                                                            \
   if ((x))                                                                                        \
   {                                                                                               \
   }                                                                                               \
   else                                                                                            \
   {                                                                                               \
     LOGGER_FATAL("ASSERT - {}\n\t{}\n\tin file: {}\n\tin line: {}", #x, msg, __FILE__, __LINE__); \
-    LOGGER_BREAK                                                                                  \
+    DEBUG_BREAK                                                                                   \
   }
 
 #else
@@ -87,16 +85,23 @@ namespace MC
 #if defined(_WIN32) || defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__) || defined(__BORLANDC__)
 #define OS_WIN
 #define OS "WINDOWS"
-#define LOGGER_BREAK __debugbreak();
 
 #elif defined(__linux__) || defined(LINUX)
 #define OS_LINUX
 #define OS "LINUX"
-#define LOGGER_BREAK __builtin_debugtrap();
 
 #elif defined(__APPLE__)
 #define OS_APPLE
 #define OS "MACOSX"
-#define LOGGER_BREAK __builtin_trap();
 
+#endif
+
+#if defined(_MSC_VER)
+#define DEBUG_BREAK __debugbreak();
+#elif defined(__clang__)
+#define DEBUG_BREAK __builtin_debugtrap();
+#elif defined(__GNUC__)
+#define DEBUG_BREAK __builtin_trap();
+#else
+#define DEBUG_BREAK *((int *)0) = 0; // Fallback: causa un segmentation fault
 #endif

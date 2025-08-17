@@ -1,27 +1,32 @@
+// Renderer.h
+
 #ifndef RENDERER_H
 #define RENDERER_H
 
-// Dichiarazione anticipata di SDL_Renderer per evitare di includere l'header SDL completo qui.
-// Questa è una buona pratica per ridurre i tempi di compilazione.
-struct SDL_Renderer;
+struct SDL_Window;
 
 namespace MC
 {
+  // La classe Renderer è responsabile di tutte le operazioni di disegno.
   class Renderer
   {
   public:
-    Renderer();
-    void setRenderer(SDL_Renderer *sdlRenderer);
+    // Costruttore: richiede una finestra SDL per il rendering.
+    Renderer(SDL_Window* window);
+    // Distruttore.
     ~Renderer();
 
-    // Disabilita la copia e l'assegnazione, poiché questa classe gestisce un puntatore raw.
+    // clear pulisce lo schermo con un colore di default.
+    void clear() const;
+    // swapBuffers scambia i buffer per visualizzare il frame renderizzato.
+    void swapBuffers() const;
+
+    // Disabilita la copia e l'assegnazione per prevenire problemi di gestione della memoria.
     Renderer(const Renderer &) = delete;
     Renderer &operator=(const Renderer &) = delete;
 
   private:
-    // Un puntatore non proprietario al renderer SDL principale gestito dalla classe Window.
-    // Non serve gestire il ciclo di vita del renderer, perchè ci pensa SDL (nella classe Window)
-    SDL_Renderer *m_SdlRenderer;
+    SDL_Window *m_SdlWindow; // Puntatore alla finestra SDL (non posseduto da questa classe).
   };
 }
 
