@@ -28,7 +28,14 @@ Questo progetto utilizza CMake per la gestione della build.
 - **SDL3**: Libreria per la gestione di finestre, input e audio.
 - **glad**: Libreria per il caricamento dei puntatori a funzioni di OpenGL.
 
-Per `spdlog`, `SDL3` e `glad`, è necessario scaricare le librerie e inserirle nella cartella `vendored` presente nella root del progetto.
+Per `spdlog`, `SDL3` e `glad`, è necessario scaricare le librerie e inserirle nella cartella `vendored` presente nella root del progetto. La struttura della cartella `vendored` dovrebbe essere la seguente:
+
+```
+vendored/
+├─── glad/
+├─── SDL/
+└─── spdlog/
+```
 
 > [!WARNING]
 > Per `glad`, si consiglia di utilizzare la versione **OpenGL 4.1 (Core)**. È tuttavia importante verificare quale versione di OpenGL è supportata dal proprio sistema operativo. Ad esempio, Manjaro 25 supporta OpenGL 4.1 (Compatibility), quindi in quel caso bisognerebbe usare tale versione.
