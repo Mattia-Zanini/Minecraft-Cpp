@@ -51,13 +51,11 @@ cmake -S . -B build && cmake --build build
 
 ### Esecuzione
 
-Dopo la compilazione, l'eseguibile si troverà nella directory `build/` (o
-`build/Release/` su Windows, o `build/minecraftClone.app` su macOS).
+Dopo la compilazione, l'eseguibile si troverà nella directory `build/`. 
 
-Esempio (Linux/macOS):
-
+Per eseguire il programma su macOS e visualizzare l'output del log direttamente dal terminale, esegui il seguente comando dalla root del progetto:
 ```bash
-./minecraftClone
+./build/minecraftClone.app/Contents/MacOS/minecraftClone
 ```
 
 ## Dipendenze
