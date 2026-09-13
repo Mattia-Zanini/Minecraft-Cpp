@@ -1,11 +1,10 @@
 #include "logmanager/logger.h"
+
 #include <memory>
 
-namespace MC
-{
+namespace MC {
   // init inizializza e configura il logger di spdlog.
-  void Logger::init()
-  {
+  void Logger::init() {
     // Crea un "sink" per la console che supporta i colori per i diversi livelli di log.
     auto consoleSink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
     // Imposta il formato dei messaggi di log.
@@ -13,7 +12,7 @@ namespace MC
     consoleSink->set_pattern("[%d-%m-%Y %H:%M:%S.%e] [%l] [%n]: %v%$");
 
     // Un logger può avere più sink (es. console e file). Qui usiamo solo la console.
-    std::vector<spdlog::sink_ptr> sinks{consoleSink};
+    std::vector<spdlog::sink_ptr> sinks{ consoleSink };
 
     // Crea il logger vero e proprio con un nome e i sink configurati.
     auto logger = std::make_shared<spdlog::logger>(LOGGER_DEFAULT_NAME, sinks.begin(), sinks.end());
@@ -29,21 +28,18 @@ namespace MC
   }
 
   // shutdown rilascia le risorse utilizzate da spdlog.
-  void Logger::shutdown()
-  {
+  void Logger::shutdown() {
     spdlog::shutdown();
   }
 
   // Il costruttore chiama init() per configurare il logger all'avvio.
-  Logger::Logger()
-  {
+  Logger::Logger() {
     init();
     LOGGER_INFO("Logger initialized");
   }
 
   // Il distruttore chiama shutdown() per una pulizia ordinata.
-  Logger::~Logger()
-  {
+  Logger::~Logger() {
     LOGGER_INFO("Logger is shutting down");
     shutdown();
   }

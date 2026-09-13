@@ -11,17 +11,13 @@
 
 #include "string"
 
-namespace MC
-{
-  Window::Window()
-  {
+namespace MC {
+  Window::Window() {
     initVars();
   }
 
-  Window::~Window()
-  {
-    if (m_Window)
-    {
+  Window::~Window() {
+    if (m_Window) {
       SDL_DestroyWindow(m_Window);
       LOGGER_INFO("Destroyed the Window");
 
@@ -32,13 +28,11 @@ namespace MC
     initVars();
   }
 
-  bool Window::createWindow(const char *title, int width, int height, int minWidth, int minHeight, SDL_WindowFlags flags)
-  {
+  bool Window::createWindow(const char* title, int width, int height, int minWidth, int minHeight, SDL_WindowFlags flags) {
     LOGGER_INFO("Beginning the operations to create the window");
 
     // Inizializzo la libreria SDL
-    if (SDL_Init(SDL_INIT_VIDEO) == false)
-    {
+    if (SDL_Init(SDL_INIT_VIDEO) == false) {
       LOGGER_ERROR("Couldn't initialize SDL: {}", SDL_GetError());
       return m_Created;
     }
@@ -57,41 +51,34 @@ namespace MC
 
     // Creo la finestra
     m_Window = SDL_CreateWindow(title, width, height, flags);
-    if (m_Window == nullptr)
-    {
+    if (m_Window == nullptr) {
       LOGGER_ERROR("Couldn't create window: {}", SDL_GetError());
       return m_Created;
     }
 
     // Acquisizione del contesto OpenGL
     m_GlContext = SDL_GL_CreateContext(m_Window);
-    if (m_GlContext == nullptr)
-    {
+    if (m_GlContext == nullptr) {
       LOGGER_ERROR("Failed to create OpenGL context: {}", SDL_GetError());
       return m_Created;
     }
 
     // Inizializza GLAD per caricare i puntatori alle funzioni di OpenGL
-    if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress))
-    {
+    if (!gladLoadGLLoader((GLADloadproc)SDL_GL_GetProcAddress)) {
       LOGGER_ERROR("Failed to initialize GLAD: {}", glad_glGetError());
       return m_Created;
     }
 
     // Ottengo la versione presente nel sistema di OpenGL
-    const GLubyte *version = glGetString(GL_VERSION);
-    if (version)
-    {
-      LOGGER_INFO("OpenGL Version: {}", (const char *)version);
-    }
-    else
-    {
+    const GLubyte* version = glGetString(GL_VERSION);
+    if (version) {
+      LOGGER_INFO("OpenGL Version: {}", (const char*)version);
+    } else {
       LOGGER_ERROR("Failed to get OpenGL version");
     }
 
     // Imposto la dimensione minima della finestra
-    if (SDL_SetWindowMinimumSize(m_Window, minWidth, minHeight) == false)
-    {
+    if (SDL_SetWindowMinimumSize(m_Window, minWidth, minHeight) == false) {
       LOGGER_ERROR("Couldn't set minimum window size: {}", SDL_GetError());
     }
 
@@ -100,8 +87,7 @@ namespace MC
     return m_Created;
   }
 
-  void Window::initVars()
-  {
+  void Window::initVars() {
     m_Created = false;
     m_Window = nullptr;
     m_Surface = nullptr;
@@ -109,8 +95,7 @@ namespace MC
     m_Event = nullptr;
   }
 
-  SDL_Window *Window::getSdlWindow() const
-  {
+  SDL_Window* Window::getSdlWindow() const {
     ASSERT(m_Window, "m_Window is null");
     return m_Window;
   }

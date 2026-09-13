@@ -3,9 +3,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "core/Window.h"
-#include "core/Renderer.h"
 #include "core/InputHandler.h"
+#include "core/Renderer.h"
+#include "core/Window.h"
 
 #include "logmanager/logger.h"
 
@@ -13,12 +13,10 @@
 
 #include "memory"
 
-namespace MC
-{
+namespace MC {
   // La classe Game è il cuore del gioco.
   // Gestisce il ciclo di gioco principale, l'input, l'aggiornamento dello stato e il rendering.
-  class Game
-  {
+  class Game {
   public:
     // Costruttore: inizializza il gioco.
     Game();
@@ -38,10 +36,10 @@ namespace MC
     // render disegna il gioco.
     void render();
 
-    bool m_IsRunning; // Flag che indica se il gioco è in esecuzione.
-    std::unique_ptr<Window> m_Window; // La finestra di gioco.
+    bool m_IsRunning;                             // Flag che indica se il gioco è in esecuzione.
+    std::unique_ptr<Window> m_Window;             // La finestra di gioco.
     std::unique_ptr<InputHandler> m_InputHandler; // Il gestore di input.
-    std::unique_ptr<Renderer> m_Renderer; // Il renderer.
+    std::unique_ptr<Renderer> m_Renderer;         // Il renderer.
   };
 }
 

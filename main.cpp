@@ -1,8 +1,7 @@
 #include "include/core/Game.h"
 #include "logmanager/logger.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char* argv[]) {
   // Inizializza il logger
   MC::Logger loggerManager;
   LOGGER_INFO("SDL version: {}.{}.{}", SDL_MAJOR_VERSION, SDL_MINOR_VERSION, SDL_MICRO_VERSION);

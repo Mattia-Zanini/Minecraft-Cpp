@@ -6,11 +6,9 @@
 #include "SDL3/SDL_events.h"
 #include "SDL3/SDL_scancode.h"
 
-namespace MC
-{
+namespace MC {
   // La classe InputHandler gestisce tutti gli eventi di input dell'utente (tastiera, mouse, etc.).
-  class InputHandler
-  {
+  class InputHandler {
   public:
     // Costruttore: inizializza il gestore di input.
     InputHandler();
@@ -24,8 +22,8 @@ namespace MC
     bool shouldQuit() const;
 
   private:
-    bool m_Quit; // Flag che indica se è stata richiesta la chiusura del gioco.
-    const bool *m_KeyboardState; // Puntatore allo stato attuale della tastiera (gestito da SDL).
+    bool m_Quit;                 // Flag che indica se è stata richiesta la chiusura del gioco.
+    const bool* m_KeyboardState; // Puntatore allo stato attuale della tastiera (gestito da SDL).
   };
 }
 #endif

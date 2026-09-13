@@ -6,28 +6,23 @@
 
 #include <cstring>
 
-namespace MC
-{
+namespace MC {
   // Costruttore: inizializza lo stato di quit a false e ottiene lo stato della tastiera.
-  InputHandler::InputHandler() : m_Quit(false)
-  {
+  InputHandler::InputHandler() : m_Quit(false) {
     m_KeyboardState = SDL_GetKeyboardState(NULL);
     ASSERT(m_KeyboardState, "Keyboard state is null");
     LOGGER_INFO("Input Handler created");
   }
 
   // Distruttore: non fa nulla.
-  InputHandler::~InputHandler()
-  {
+  InputHandler::~InputHandler() {
     LOGGER_INFO("Destroyed the Input Handler");
   }
 
   // processEvents gestisce gli eventi SDL, impostando quit a true se viene rilevato l'evento di chiusura.
-  void InputHandler::processEvents()
-  {
+  void InputHandler::processEvents() {
     SDL_Event event;
-    while (SDL_PollEvent(&event))
-    {
+    while (SDL_PollEvent(&event)) {
       if (event.type == SDL_EVENT_QUIT)
         m_Quit = true;
     }

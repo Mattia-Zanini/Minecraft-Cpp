@@ -2,29 +2,24 @@
 
 #include "logmanager/logger.h"
 
-#include "glad/glad.h"
 #include "SDL3/SDL_video.h"
+#include "glad/glad.h"
 
-namespace MC
-{
-  Renderer::Renderer(SDL_Window* window)
-  {
+namespace MC {
+  Renderer::Renderer(SDL_Window* window) {
     ASSERT(window, "SDL_Window is null");
     m_SdlWindow = window;
   }
 
-  Renderer::~Renderer()
-  {
+  Renderer::~Renderer() {
   }
 
-  void Renderer::clear() const
-  {
+  void Renderer::clear() const {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
   }
 
-  void Renderer::swapBuffers() const
-  {
+  void Renderer::swapBuffers() const {
     SDL_GL_SwapWindow(m_SdlWindow);
   }
 }
