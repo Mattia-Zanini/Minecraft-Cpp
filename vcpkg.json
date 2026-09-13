@@ -1,0 +1,17 @@
+{
+  "name": "minecraft-cpp",
+  "version": "0.1.0",
+  "dependencies": [
+    "sdl3",
+    {
+      "name": "glad",
+      "features": [
+        "loader",
+        "gl-api-41"
+      ]
+    },
+    "spdlog",
+    "fmt",
+    "glm"
+  ]
+}
