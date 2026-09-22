@@ -18,10 +18,17 @@ namespace MC {
   // Gestisce il ciclo di gioco principale, l'input, l'aggiornamento dello stato e il rendering.
   class Game {
   public:
+    static constexpr int WIDTH = 1280;
+    static constexpr int HEIGHT = 720;
+
     // Costruttore: inizializza il gioco.
     Game();
     // Distruttore: pulisce le risorse del gioco.
     ~Game();
+
+    // Disabilita costruttore di copia e operatore di assegnazione (gestione esplicita delle risorse)
+    Game(const Game&) = delete;
+    Game& operator=(const Game&) = delete;
 
     // run avvia il ciclo di gioco principale.
     void run();
@@ -36,10 +43,14 @@ namespace MC {
     // render disegna il gioco.
     void render();
 
-    bool m_IsRunning;                             // Flag che indica se il gioco è in esecuzione.
-    std::unique_ptr<Window> m_Window;             // La finestra di gioco.
-    std::unique_ptr<InputHandler> m_InputHandler; // Il gestore di input.
-    std::unique_ptr<Renderer> m_Renderer;         // Il renderer.
+    bool m_IsRunning; // Flag che indica se il gioco è in esecuzione.
+
+    // L'ordine di dichiarazione definisce l'ordine di inizializzazione (dall'alto in basso)
+    // e di distruzione (in ordine inverso, dal basso in alto). Questo ordine è critico:
+    // il renderer e l'input handler dipendono dall'inizializzazione del sottosistema e della finestra.
+    Window m_Window{ WIDTH, HEIGHT, "Minecraft C++" };
+    InputHandler m_InputHandler{};
+    Renderer m_Renderer{ m_Window };
   };
 }
 

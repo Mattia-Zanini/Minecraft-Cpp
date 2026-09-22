@@ -6,10 +6,13 @@
 struct SDL_Window;
 
 namespace MC {
+  class Window;
+
   // La classe Renderer è responsabile di tutte le operazioni di disegno.
   class Renderer {
   public:
-    // Costruttore: richiede una finestra SDL per il rendering.
+    // Costruttori: accetta un riferimento a Window o un puntatore grezzo a SDL_Window.
+    Renderer(Window& window);
     Renderer(SDL_Window* window);
     // Distruttore.
     ~Renderer();

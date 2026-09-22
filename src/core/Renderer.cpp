@@ -1,4 +1,5 @@
 #include "core/Renderer.h"
+#include "core/Window.h"
 
 #include "logmanager/logger.h"
 
@@ -6,12 +7,17 @@
 #include "glad/glad.h"
 
 namespace MC {
+  Renderer::Renderer(Window& window) : Renderer(window.getSdlWindow()) {
+  }
+
   Renderer::Renderer(SDL_Window* window) {
     ASSERT(window, "SDL_Window is null");
     m_SdlWindow = window;
+    LOGGER_INFO("Renderer created");
   }
 
   Renderer::~Renderer() {
+    LOGGER_INFO("Destroyed the Renderer");
   }
 
   void Renderer::clear() const {

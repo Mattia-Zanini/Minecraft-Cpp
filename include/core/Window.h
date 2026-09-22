@@ -6,14 +6,15 @@
 #include "SDL3/SDL.h"
 #include "SDL3/SDL_main.h"
 
-#include "memory"
+#include <string>
 
 namespace MC {
   // La classe Window astrae la creazione e la gestione della finestra di gioco tramite SDL.
   class Window {
   public:
-    // Costruttore: inizializza i valori di default.
+    // Costruttori: inizializza i valori di default o crea direttamente la finestra.
     Window();
+    Window(int width, int height, const std::string& title);
     // Distruttore: distrugge la finestra e rilascia le risorse SDL.
     ~Window();
 

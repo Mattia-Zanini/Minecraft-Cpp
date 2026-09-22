@@ -21,6 +21,10 @@ namespace MC {
     // shouldQuit restituisce true se è stato richiesto di chiudere il gioco (es. chiudendo la finestra).
     bool shouldQuit() const;
 
+    // Disabilita la copia e l'assegnazione.
+    InputHandler(const InputHandler&) = delete;
+    InputHandler& operator=(const InputHandler&) = delete;
+
   private:
     bool m_Quit;                 // Flag che indica se è stata richiesta la chiusura del gioco.
     const bool* m_KeyboardState; // Puntatore allo stato attuale della tastiera (gestito da SDL).

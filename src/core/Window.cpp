@@ -9,14 +9,28 @@
 
 // #include "OpenGL/gl3.h"
 
-#include "string"
+#include <stdexcept>
+#include <string>
 
 namespace MC {
   Window::Window() {
     initVars();
   }
 
+  Window::Window(int width, int height, const std::string& title) {
+    initVars();
+    if (!createWindow(title.c_str(), width, height, 640, 480, SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL)) {
+      LOGGER_FATAL("Failed to initialize Window");
+      throw std::runtime_error("Failed to initialize Window");
+    }
+  }
+
   Window::~Window() {
+    if (m_GlContext) {
+      SDL_GL_DestroyContext(m_GlContext);
+      LOGGER_INFO("Destroyed OpenGL context");
+    }
+
     if (m_Window) {
       SDL_DestroyWindow(m_Window);
       LOGGER_INFO("Destroyed the Window");
@@ -93,6 +107,7 @@ namespace MC {
     m_Surface = nullptr;
     m_Texture = nullptr;
     m_Event = nullptr;
+    m_GlContext = nullptr;
   }
 
   SDL_Window* Window::getSdlWindow() const {
