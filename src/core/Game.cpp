@@ -5,9 +5,7 @@
 
 #include "logmanager/logger.h"
 
-#include "SDL3/SDL.h"
-#include "SDL3/SDL_main.h"
-#include "SDL3/SDL_render.h"
+#include "SDL3/SDL_video.h"
 
 namespace MC {
   // Inizializza le variabili
